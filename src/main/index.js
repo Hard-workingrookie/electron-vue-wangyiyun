@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow ,ipcMain} from 'electron'
+const electron = require('electron')
 
 /**
  * Set `__static` path to static files in production
@@ -11,6 +12,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow
+const Menu = electron.Menu
 const winURL =
   process.env.NODE_ENV === 'development'
     ? `http://localhost:9080`
@@ -20,13 +22,17 @@ function createWindow() {
   /**
    * Initial window options
    */
- 
+  Menu.setApplicationMenu(null)
   mainWindow = new BrowserWindow({
     height: 670, //窗口高度
-    width: 1000, //窗口宽度
-    frame: true, //是否显示窗口边框
-    resizable: false, //可否缩放
-    movable: true //可否移动
+    width: 1400, //窗口宽度
+    frame: false, //是否显示窗口边框
+    resizable: true, //可否缩放
+    movable: true, //可否移动
+    webPreferences: {
+      /*preload: path.join(__dirname, 'preload.js')*/
+      nodeIntegration: true
+    }
   })
 
   mainWindow.loadURL(winURL)
@@ -49,3 +55,7 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('min', e=> mainWindow.minimize());
+ipcMain.on('max', e=> mainWindow.maximize());
+ipcMain.on('close', e=> mainWindow.close());

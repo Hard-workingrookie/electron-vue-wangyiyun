@@ -1,17 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { createPersistedState, createSharedMutations } from 'vuex-electron'
-
-import modules from './modules'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules,
-  plugins: [
-    createPersistedState(),
-    createSharedMutations()
-  ],
+  state:{
+    paneName:'个性推荐'
+  },
+  mutations:{
+    setPaneName:(state, data) => {
+      console.log('setPaneName',state.paneName)
+      state.paneName = data
+    }
+  },
+  getters: {
+    getPaneName: (state) => {
+      return state.paneName
+    }
+  },
   strict: process.env.NODE_ENV !== 'production'
 })

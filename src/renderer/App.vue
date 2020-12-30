@@ -1,15 +1,29 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <Header />
+    <router-view />
+    <FooterMusic />
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'ele-vue'
-  }
+import Header from "@/components/Header";
+import FooterMusic from "@/components/FooterMusic";
+export default {
+  name: "ele-vue",
+  components: {
+    Header,
+    FooterMusic,
+  },
+};
 </script>
 
 <style>
-  /* CSS */
+/* CSS */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 </style>
