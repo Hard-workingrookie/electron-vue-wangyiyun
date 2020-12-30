@@ -1,5 +1,7 @@
 接口地址https://binaryify.github.io/NeteaseCloudMusicApi/#/
 
+#### 项目使用了axios+element-ui+vuex+vue-router+iconfont(阿里巴巴)
+
 # ele-vue
 
 > An electron-vue project
